@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mentorpi">
+
+  <xacro:arg name="sim_mode" default="false"/>
+
+  <!-- The robot itself: Hiwonder's model, shared by sim and real -->
+  <xacro:include filename="$(find mentorpi_description)/urdf/mentorpi.xacro"/>
+
+  <!-- Gazebo-only parts -->
+  <xacro:if value="$(arg sim_mode)">
+    <xacro:include filename="$(find mentorpi_bringup)/urdf/gazebo_control.xacro"/>
+  </xacro:if>
+
+</robot>
