@@ -56,24 +56,21 @@ class SafetyGate(Node):
         self.pub.publish(out)
 
     def on_stop(self, request, response):
-        # TODO 2: send one zero command, then fill in the response.
-        # Hint: self.publish_zero(), response.success (True), response.message ("On_stop command")
         self.publish_zero()
-        response.success (True)
-        response.message ("On_stop command")
+        response.success = True
+        response.message = 'Sent a zero velocity command'
         return response
 
+
     def on_enable_motion(self, request, response):
-        # TODO 3: store request.data in self.enabled.
-        self.enable = request.data
-        # If motion was just turned OFF, also send one zero command.
-        if response.success:
-            response.message = "Motion enabled"
-        else:
-            response.message = "Motion disabled"
+        self.enabled = request.data
+        if not self.enabled:
             self.publish_zero()
-        # Then fill in response.success and response.message
-        # (for example 'Motion enabled' or 'Motion disabled').
+        response.success = True
+        if self.enabled:
+            response.message = 'Motion enabled'
+        else:
+            response.message = 'Motion disabled'
         return response
 
 

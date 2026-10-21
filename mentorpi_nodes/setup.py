@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'safety_gate = mentorpi_nodes.safety_gate:main'
+            'safety_gate = mentorpi_nodes.safety_gate:main',
+            'stop_client = mentorpi_nodes.stop_client:main'
         ],
     },
 )
